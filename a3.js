@@ -106,9 +106,28 @@ d3.csv("names.csv", function(error, data) {
         .attr("d", function(d) { return line(d.values); })
         .style("stroke", function(d) { return color(d.Name); });
 
-    name.append("text")
+/*    name.append("text")
         .datum(function(d) { return {name: d.Name, value: d.values[d.values.length - 1]}; })
         .attr("transform", function(d) { return "translate(" + x(d.value.year) + "," + y(d.value.count) + ")"; })
         .attr("dy", ".35em")
-        .text(function(d) { return d.Name; });
+        .text(function(d) { return d.Name; })
+*/
+
+/*
+    // checkboxes data
+    var checkbox = svg.append("path")
+        .attr("class", "line")
+        .datum(function(d) { return data })
+        .attr("d", path);
+
+    // checkboxes select
+    d3.selectAll(".box").on("change", function() {
+        var type = this.type,
+            display = this.checked ? "inline" : "none";
+
+        svg.selectAll(".symbol")
+            .filter(function(d) { return d.properties.type === type; })
+            .attr("display", display);
+    });
+*/
 });
