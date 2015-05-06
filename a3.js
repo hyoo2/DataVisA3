@@ -13,7 +13,7 @@ var y = d3.scale.linear()
 var color = d3.scale.category10();
 
 // gets data
-d3.csv("names.csv", function(error, data) {
+d3.csv("names2.csv", function(error, data) {
     color.domain(d3.keys(data[0]).filter(function(key) { return key !== "Year"; }));
 
     data.forEach(function(d) {
