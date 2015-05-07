@@ -6,29 +6,50 @@ body {
   font: 11px sans-serif;
 }
 
-.axis line,
-.axis text {
-  font: 11px sans-serif;
-}
-.axis path {
+.axis path,
+.axis line {
   fill: none;
   stroke: #000;
   shape-rendering: crispEdges;
+}
+
+.line {
+  fill: none;
+  stroke-width: 1.5px;
 }
 
 
 </style>
 <body>
 
-<div class="checkboxes">
-  <input class="box" id="male" type="checkbox">M</input>
+<label for="type">Gender:</label>
+
+<input type="text" id="myType" readonly style="border: 0; color: #f6931f; font-weight: bold;"><br>
+<select id="options">
+  <option value="all">All</option>
+  <option value="male">Male</option>
+  <option value="female">Female</option>
+</select>
+
+<!--<div class="checkboxes">
+&lt;!&ndash;  <input class="box" id="male" type="checkbox" onclick="hideSVG('SVGid')" checked>Male</input>
   <br>
-  <input class="box" id="female" type="checkbox">F</input>
+  <input class="box" id="female" type="checkbox" onclick="hideSVG('SVGid')" checked>Female</input>
   <br>
-</div>
+&ndash;&gt;
+  <input type="checkbox" checked="checked" class="box" value="male">Male</input>
+  <input type="checkbox" checked="checked" class="box" value="female">Female</input>
+</div>-->
 
 <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 <script src="a3.js"></script>
+
+<script>
+  document.getElementById("options").onchange = function() {
+    $("myType").val(this.value);
+    filterType(this.value);
+  }
+</script>
 
 </body>
 </html>
