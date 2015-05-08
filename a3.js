@@ -12,33 +12,6 @@ var svg = d3.select("body").append("svg")
 
 var myData = [];
 
-// HELP FROM HERE!!!!
-// filter data using drop down
-var dataSet = myData;
-
-var myType = "all";
-var patt = new RegExp("all");
-
-function filterType(myType) {
-    myType = this.myType;
-    var res = patt.test(myType);
-    if (res) {
-        var toVis = dataSet;
-    }
-    else {
-        var toVis = dataSet.filter(function(d, i) {
-            return d["type"] == myType;
-        });
-    }
-    drawVis(toVis);
-}
-
-function drawVis(myData) {
-
-}
-
-// TO HERE!!!!!
-
 var nameArr = [];
 
 var countYearName = [];
@@ -56,53 +29,9 @@ d3.csv("names.csv", function(error, data) {
         Ranking = +d.Ranking;
     });
 
-/*    d3.selectAll(".box").on('click', function() {
-        var value = this.value,
-            display = this.checked ? "inline" : "none";
-
-        svg.selectAll(".symbol")
-            .filter(function(d) { return d.properties.type === type; })
-            .attr("display", display);
-    });*/
-
-/*    function checkGender() {
-        var mChecked = document.getElementById("male").checked;
-        var fChecked = document.getElementById("female").checked;
-
-        if (mChecked && fChecked) {
-            names.filterAll();
-        }
-        else if (mChecked && !fChecked) {
-            names.filter('mChecked');
-        }
-        else if (!mChecked && fChecked) {
-            names.filter('fChecked');
-        }
-        else {
-            return;
-        }
-    }*/
-
-/*    //checkboxes data
-    var checkbox = svg.append("path")
-        .attr("class", "line")
-        .datum(function(d) { return data })
-        .attr("d", "path");
-
-    //checkboxes select
-    d3.selectAll(".box").on("change", function() {
-        var type = this.type,
-            display = this.checked ? "inline" : "none";
-
-        svg.selectAll(".symbol")
-            .filter(function(d) { return d.properties.type === type; })
-            .attr("display", display);
-    });*/
-
-    //This creates an array per name and sets the value of that array to the array of year objects for that name
+    //This creates an array per name and sets the value of that arrat to the array of year objects for that name
     data.forEach(function(d) {
         countYearName.push({Year: +d.Year, Name: d.Name, Count: +d.Count});
-
         var foundAtIndex = -1;
 
         for (var i=0; i<=nameArr.length; i++) {
@@ -122,7 +51,6 @@ d3.csv("names.csv", function(error, data) {
     });
 
     //console.log(countYearName);
-
     var x = d3.scale.linear()
         .range([0, width]);
 
@@ -132,7 +60,7 @@ d3.csv("names.csv", function(error, data) {
     var line = d3.svg.line()
         .interpolate("basis")
         .x(function(d) { return (x(d.Year) + 60); })
-        .y(function(d) { return y(d.Count); });
+        .y(function(d) { return (y(d.Count) + 30); });
 
     var xAxis = d3.svg.axis()
         .scale(x)
@@ -205,7 +133,7 @@ d3.csv("names.csv", function(error, data) {
         })
         .append("svg:title")
         .text(function(d, i) {
-            return "name: " + d[0].Name + " year: " + d[0].Year + " gender: " + d[0].Gender;
+            return "name: " + d[0].Name + " gender: " + d[0].Gender;
         })
 
     svg.selectAll(".name")
@@ -216,11 +144,15 @@ d3.csv("names.csv", function(error, data) {
     var display;
 
     d3.selectAll(".filter_button").on("change", function () {
-        var selected = this.value,
-            display = this.checked ? "inline" : "none";
-        alert(selected);
-        svg.selectAll(".name")
+        var selected = this.name;
+        display = this.checked ?  "inline" : "none";
+        console.log("selected: " + selected);
+        console.log("display: " + display);
+
+        var filterName = d3.select("svg")
+            .selectAll(".name")
             .filter(function(d) { return d[0].Gender == selected; })
-            .attr("display", display);
+            .attr("display", display)
+            .append("path");
     });
 });

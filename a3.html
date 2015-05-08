@@ -1,56 +1,34 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
+
 <style>
-
-body {
-  font: 11px sans-serif;
-}
-
-.axis path,
-.axis line {
-  fill: none;
-  stroke: #000;
-  shape-rendering: crispEdges;
-}
-
-.line {
-  fill: none;
-  stroke-width: 1.5px;
-}
-
-
-</style>
-<body>
-
-<label for="type">Gender:</label>
-
-<input type="text" id="myType" readonly style="border: 0; color: #f6931f; font-weight: bold;"><br>
-<select id="options">
-  <option value="all">All</option>
-  <option value="male">Male</option>
-  <option value="female">Female</option>
-</select>
-
-<!--<div class="checkboxes">
-&lt;!&ndash;  <input class="box" id="male" type="checkbox" onclick="hideSVG('SVGid')" checked>Male</input>
-  <br>
-  <input class="box" id="female" type="checkbox" onclick="hideSVG('SVGid')" checked>Female</input>
-  <br>
-&ndash;&gt;
-  <input type="checkbox" checked="checked" class="box" value="male">Male</input>
-  <input type="checkbox" checked="checked" class="box" value="female">Female</input>
-</div>-->
-
-<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-<script src="a3.js"></script>
-
-<script>
-  document.getElementById("options").onchange = function() {
-    $("myType").val(this.value);
-    filterType(this.value);
+  body {
+    font: 10px sans-serif;
   }
-</script>
+
+  .axis path,
+  .axis line {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
+  }
+
+  .line {
+    fill: none;
+    stroke-width: 1.5px;
+  }
+</style>
+
+<body>
+  <script src="http://d3js.org/d3.v3.min.js"></script>
+  <script src="a3.js"></script>
+
+  <div class="box"></div>
+
+  <div class="filter_options">
+    <input class="filter_button" id="female" name="F" type="checkbox" checked>Female</input><br>
+    <input class="filter_button" id="male" name="M" type="checkbox" checked>Male</input><br>
+  </div>
 
 </body>
 </html>
-
